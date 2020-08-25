@@ -5,7 +5,7 @@
 # fire up service
 product="$1"
 if [ -z "$1" ]; then
-    product="Default"
+    product="OpenRSR"
 fi
 
 source /opt/openfoam7/etc/bashrc
@@ -22,10 +22,10 @@ CodeChecker check \
 
 # store check results
 CodeChecker cmd products \
-    add --url http://openrsr-code-check.herokuapp.com:80 $product
+    add --url http://openrsr-code-check.herokuapp.com:80 OpenRSR
 CodeChecker store /tmp/static_results \
-    -n openrsr \
-    --url http://openrsr-code-check.herokuapp.com:80/$product
+    -n $product \
+    --url http://openrsr-code-check.herokuapp.com:80/OpenRSR
 
 # Generate html reports
 #CodeChecker parse -e html /tmp/results -o ./reports_html
