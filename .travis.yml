@@ -1,0 +1,25 @@
+git:
+  depth: 1
+addons:
+  apt:
+    packages:
+      - docker-ce
+      - curl
+services:
+    - docker
+
+os: linux
+
+language:
+  - cpp
+
+branches:
+  only:
+      - static_checker
+
+before_script:
+  - git clone --depth 1 -b $TRAVIS_BRANCH https://github.com/FoamScience/OpenRSR-OF7
+  - cp static_checker.sh OpenRSR-OF7/scripts/static_checker.sh
+
+script:
+  - docker run --rm -u root -v $PWD/OpenRSR-OF7:/OpenRSR-OF7 foamscience/openrsr-code-checker /bin/bash -l -c "cd /OpenRSR-OF7; ./scripts/static_checker.sh"
