@@ -19,6 +19,7 @@ branches:
 
 before_script:
   - git clone --depth 1 -b $TRAVIS_BRANCH https://github.com/FoamScience/OpenRSR-OF7
+  - pwd
   - cp static_checker.sh OpenRSR-OF7/scripts/static_checker.sh
 
 script:
