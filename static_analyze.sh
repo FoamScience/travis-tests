@@ -3,6 +3,7 @@
 # Assuming CodeChecker is installed and sourced
 
 # fire up service
+product="$1"
 if [ -z "$1" ]; then
     product="Default"
 fi
