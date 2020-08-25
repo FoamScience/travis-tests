@@ -7,6 +7,10 @@ if [ -z "$1" ]; then
     product="Default"
 fi
 
+source /opt/openfoam7/etc/bashrc
+
+set -x 
+
 # check the code
 CodeChecker check \
     -b "./Allwclean; wmake libso src/rsr" \
@@ -20,7 +24,7 @@ CodeChecker cmd products \
     add --url http://openrsr-code-check.herokuapp.com:80 $product
 CodeChecker store /tmp/static_results \
     -n openrsr \
-    --url http://openrsr-code-check.herokuapp.com/$product
+    --url http://openrsr-code-check.herokuapp.com:80/$product
 
 # Generate html reports
 #CodeChecker parse -e html /tmp/results -o ./reports_html
