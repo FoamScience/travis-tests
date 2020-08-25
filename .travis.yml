@@ -22,4 +22,4 @@ before_script:
   - cp static_analyze.sh OpenRSR-OF7/scripts/static_analyze.sh
 
 script:
-  - docker run --rm -u root -v $PWD/OpenRSR-OF7:/OpenRSR-OF7 foamscience/openrsr-code-checker /bin/bash -l -c "cd /OpenRSR-OF7; ./scripts/static_checker.sh"
+  - docker run --rm -u root -v $PWD/OpenRSR-OF7:/OpenRSR-OF7 foamscience/openrsr-code-checker /bin/bash -l -c "cd /OpenRSR-OF7; ./scripts/static_analyze.sh $TRAVIS_BRANCH"
