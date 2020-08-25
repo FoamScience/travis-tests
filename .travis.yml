@@ -31,4 +31,4 @@ jobs:
         - DOCKER_CMD='foamscience/bionic-openfoam7 /bin/bash -c /OpenRSR-OF7/scripts/docker_build.sh'
     - name: Send Static Analysis to heroku app
       env:
-        - DOCKER_CMD='foamscience/openrsr-code-checker /bin/bash -l -c cd /OpenRSR-OF7; ./scripts/static_analyze.sh $TRAVIS_BRANCH'
+        - DOCKER_CMD="foamscience/openrsr-code-checker /bin/bash -l -c cd /OpenRSR-OF7; ./scripts/static_analyze.sh "+$TRAVIS_BRANCH
