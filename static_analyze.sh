@@ -2,10 +2,11 @@
 
 # Assuming CodeChecker is installed and sourced
 
-# fire up service
-product="$1"
+branch="$1"
+commit="$2"
 if [ -z "$1" ]; then
-    product="OpenRSR"
+    branch="develop"
+    commit="0000000"
 fi
 
 source /opt/openfoam7/etc/bashrc
@@ -14,17 +15,15 @@ set -x
 
 # check the code
 CodeChecker check \
-    -b "./Allwclean; wmake libso src/rsr" \
+    -b "./Allwclean; ./Allwmake" \
     -i scripts/analyzer_skipfile \
     --checker-config \
     clang-tidy:cppcoreguidelines-special-member-functions.AllowMissingMoveFunctions=1\
     -o /tmp/static_results
 
 # store check results
-CodeChecker cmd products \
-    add --url http://openrsr-code-check.herokuapp.com:80 OpenRSR
 CodeChecker store /tmp/static_results \
-    -n $product \
+    -n $branch --tag $commit \
     --url http://openrsr-code-check.herokuapp.com:80/OpenRSR
 
 # Generate html reports
